@@ -1,19 +1,37 @@
 package basic.selenium;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import net.bytebuddy.asm.Advice.Argument;
 
 public class Wdr {
-	public static void main(String[] args) {
-		webdrvr();
-	}
-	private static void webdrvr()
-	{
+	public static void main(String[] args) throws InterruptedException {
+	
 		WebDriverManager.chromedriver().setup();
-		ChromeDriver dr =new ChromeDriver();
+		WebDriver dr =new ChromeDriver();
 		dr.get("https://letcode.in/forms");
 		dr.manage().window().maximize();
-	}
+		
+		
+		
+		Thread.sleep(5000);
+		WebElement f = dr.findElement(By.id("female"));
+		
+
+		
+		JavascriptExecutor j = (JavascriptExecutor)dr;
+		j.executeScript("arguments[0].scrollIntoView(true)",f);
+		
+		f.click();
+		String st = f.getText();
+		System.out.println(st);
+
+		
+					}
 
 }
